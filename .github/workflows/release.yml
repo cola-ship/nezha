@@ -6,6 +6,8 @@ on:
       - "v*"
     branches:
       - dev
+  workflow_dispatch:
+    
 
 jobs:
   build:
@@ -13,12 +15,15 @@ jobs:
       fail-fast: true
       matrix:
         goos: [linux, windows]
-        goarch: [amd64]
+        goarch: [amd64, arm]
         include:
           - goos: linux
             goarch: arm64
           - goos: linux
             goarch: s390x
+          - goos: linux
+            goarch: arm
+            goarm: 7
 
     name: Build artifacts
     runs-on: ubuntu-latest
